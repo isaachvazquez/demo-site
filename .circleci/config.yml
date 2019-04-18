@@ -27,8 +27,8 @@ jobs:
       #       - v1-dependencies-
 
       - run: 
-        name: install dependencies
-        command: gem install percy-cli
+          name: install dependencies
+          command: gem install percy-cli
 
       # - save_cache:
       #     paths:
@@ -37,5 +37,5 @@ jobs:
 
       # run tests!
       - run: 
-        name: run tests
-        command: percy snapshot index.html
+          name: run tests
+          command: percy snapshot index.html
