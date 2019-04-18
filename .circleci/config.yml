@@ -28,8 +28,7 @@ jobs:
 
       - run: 
         name: install dependencies
-        command: |
-          gem install percy-cli
+        command: gem install percy-cli
 
       # - save_cache:
       #     paths:
@@ -39,6 +38,4 @@ jobs:
       # run tests!
       - run: 
         name: run tests
-        command: |
-          # yarn build
-          percy snapshot index.html
+        command: percy snapshot index.html
