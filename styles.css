@@ -28,6 +28,8 @@ a {
   width: 100%;
   max-width: 1400px;
   height: 100%;
+
+  border: 10px solid tomato;
 }
 
 header,
