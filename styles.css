@@ -1,5 +1,6 @@
 :root {
   --primary-color: #00aaff;
+  --grid-columns: 7;
 }
 
 * {
@@ -110,6 +111,25 @@ aside {
 footer {
   grid-column: 1 / -1;
   grid-row: 3 / -1;
+}
+
+.grid {
+  margin: 50px 0;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+}
+
+.item {
+  padding: 30px;
+  background-color: var(--primary-color);
+  border-radius: 3px;
+  color: #fff;
+}
+
+.PageSection {
+  border: 10px solid #efefef;
+  padding: 15px;
 }
 
 @media (max-width: 1000px) {
