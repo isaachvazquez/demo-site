@@ -6,8 +6,28 @@
   <title>SVG use test</title>
 </head>
 <body>
-  <svg width="50px" height="50px">
-    <use href="https://mydemo.netlify.app/defs-demo.svg#logo-twitter"></use>
+  <svg>
+    <use href="defs-demo.svg#logo-dg"></use>
   </svg>
+  
+  <svg width="20px" height="20px">
+    <use href="defs-demo.svg#logo-facebook"></use>
+  </svg>
+  <svg width="20px" height="20px">
+    <use href="defs-demo.svg#logo-instagram"></use>
+  </svg>
+  <svg width="20px" height="20px">
+    <use href="defs-demo.svg#logo-twitter"></use>
+  </svg>
+  <style>
+    svg {
+      fill: #000;
+      transition: fill 0.3s;
+    }
+
+    svg:hover {
+      fill: #c6000e;
+    }
+  </style>
 </body>
 </html>
