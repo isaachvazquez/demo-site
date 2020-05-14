@@ -6,19 +6,6 @@
   <title>SVG use test</title>
 </head>
 <body>
-  <svg>
-    <use href="defs-demo.svg#logo-dg"></use>
-  </svg>
-  
-  <svg width="20px" height="20px">
-    <use href="defs-demo.svg#logo-facebook"></use>
-  </svg>
-  <svg width="20px" height="20px">
-    <use href="defs-demo.svg#logo-instagram"></use>
-  </svg>
-  <svg width="20px" height="20px">
-    <use href="defs-demo.svg#logo-twitter"></use>
-  </svg>
   <style>
     svg {
       fill: #000;
@@ -29,5 +16,34 @@
       fill: #c6000e;
     }
   </style>
+  <svg>
+    <use href="defs-demo.svg#logo-dg"></use>
+  </svg>
+  
+  <svg width="20px" height="20px">
+    <use href="defs-demo.svg#logo-facebook"></use>
+  </svg>
+  <svg width="20px" height="20px">
+    <use href="defs-demo.svg#logo-instagram"></use>
+  </svg>
+
+  <div class="output"></div>
+
+
+  <script>
+    const output = document.querySelector('.output');
+
+    setTimeout(() => {
+      fetch('/test-component.html')
+        .then(response => response.text())
+        .then(html => {
+          let frag = document.createRange().createContextualFragment(html);
+          console.log(frag);
+          // output.innerHTML = html;
+          output.appendChild(frag);
+        })
+        .catch(e => console.log('error', e));
+    }, 1000);
+  </script>
 </body>
 </html>
