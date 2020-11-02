@@ -33,22 +33,86 @@
   </svg>
 
   <h2>Watch Here 👇</h2>
-  <div class="output"></div>
-
+  <div class="output">
+    <div class="output-target"></div>
+  </div>
 
   <script>
     const output = document.querySelector('.output');
+    const outputTarget = document.querySelector('.output-target');
+    const body = document.querySelector('body');
 
     setTimeout(() => {
-      fetch('/test-component.html')
-        .then(response => response.text())
-        .then(html => {
-          let frag = document.createRange().createContextualFragment(html);
-          console.log(frag);
-          // output.innerHTML = html;
-          output.appendChild(frag);
-        })
-        .catch(e => console.log('error', e));
+      var ajax = new XMLHttpRequest();
+      ajax.open("GET", "/test-component.html", true);
+      ajax.send();
+      ajax.onload = function (e) {
+        // output.innerHTML = ajax.responseText;
+        let regex = /(<svg)([^<]*|[^>]*)(<\/svg>)/s;
+        // let regex = /(<svg>)/g;
+        let htmlTextResponse = ajax.responseText;
+        console.log(typeof htmlTextResponse);
+        let svgStrings = htmlTextResponse.match(regex);
+        let htmlStringWithoutSVG = htmlTextResponse.replace(regex, '');
+        console.log(svgStrings);
+        console.log(htmlStringWithoutSVG);
+
+        // get the parents/locations of the svg, and save those as key:value pairs then insert them after
+
+
+        let fragment = document.createRange().createContextualFragment(htmlTextResponse);
+        let allSVG = fragment.querySelectorAll('svg');
+        const vdom = new DOMParser().parseFromString(htmlStringWithoutSVG, 'text/html');
+        // const vdom = new DOMParser().parseFromString(htmlTextResponse, 'text/html').body;
+        // const vdom = new DOMParser().parseFromString(htmlTextResponse, 'image/svg+xml');
+        console.log(htmlTextResponse);
+        console.log(fragment);
+        console.log(allSVG);
+        console.log(vdom);
+        console.log(vdom.body.innerHTML.toString());
+
+        // body.innerHTML = htmlTextResponse;
+        // output.innerHTML = htmlTextResponse;
+        
+        // allSVG.forEach(svg => {
+        //   document.body.replaceChild(svg, output);
+        // })
+
+
+        // Potential Solution
+        // 1. Create a Fragmented version of the ajax.responseText
+        // 2. Pull out the svgs and store as nodes/elements
+        // 3. Parse Response Text via DOMParser
+        // 4. Insert Body into the page
+        // 5. Insert svgs into the body
+
+        // Shane's current approach
+        // target = element to be replaced
+        // el = new element to replace with
+        // target.parentNode.replaceChild(el, target);
+        // document.body = document.createElement('body');
+        // document.body = vdom;
+        // document.replaceChild(vdom, document.body);
+
+        // document.body = vdom;
+        // const htmlBody = vdom.querySelector('body');
+        // document.body = htmlBody;
+        // document.body = document.createElement('body');
+        // document.body.appendChild(htmlBody);
+        // document.body.appendChild(frag);
+      }
+
+      // fetch('/test-component.html')
+      //   .then(response => response.text())
+      //   .then(html => {
+      //     let frag = document.createRange().createContextualFragment(html);
+      //     console.log(frag);
+      //     // output.innerHTML = html;
+      //     // output.appendChild(frag);
+      //     body.innerHTML = html;
+      //     // body.innerHTML(frag);
+      //   })
+      //   .catch(e => console.log('error', e));
     }, 1000);
   </script>
 </body>
